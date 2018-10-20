@@ -1,44 +1,20 @@
 class Sphere {
-    constructor(ctx, x, y, radius, color = 'orange', gravity = 9.81) {
+    constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange') {
         this.ctx = ctx
         this.x = x
         this.y = y
-        this.vx = 1
-        this.vy = -2
+        this.vx = vx
+        this.vy = vy
         this.radius = radius
         this.color = color
-        this.gravity = gravity
         this.mass = this.radius
-    }
-    update() {
-        var distX = Math.abs(this.x - planet.x)
-        var distY = Math.abs(this.y - planet.y)
-        var distSq = distX*distX + distY*distY;
-        var dist = Math.sqrt(distSq);
-        var force = this.mass*planet.mass/distSq;
-        
-        if((this.x < planet.x) && (this.y < planet.y)) { //top-left
-            this.vx += force * distX / dist;
-            this.vy += force * distY / dist;
-        } else if((this.x < planet.x) && (this.y > planet.y)) { //bottom-left
-            this.vx += force * distX / dist;
-            this.vy += -1*force * distY / dist;
-        } else if((this.x > planet.x) && (this.y > planet.y)) { //bottom-right
-            this.vx += -1*force * distX / dist;
-            this.vy += -1*force * distY / dist;
-        } else if((this.x > planet.x) && (this.y < planet.y)) { //top-right
-            this.vx += -1*force * distX / dist;
-            this.vy += force * distY / dist;
-        }
-        this.x += this.vx
-        this.y += this.vy
     }
     draw() {
         this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/15, this.x, this.y, this.radius*2)
         this.gradient.addColorStop(0, this.color);
         this.gradient.addColorStop(1, 'rgb(35, 35, 35)');
         this.ctx.fillStyle = this.gradient;
-        this.ctx.shadowBlur = 0.3*this.radius;
+        this.ctx.shadowBlur = 0.35*this.radius;
         this.ctx.shadowColor = "black";
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
         this.ctx.beginPath()
@@ -47,5 +23,44 @@ class Sphere {
         this.ctx.fill()
         this.ctx.stroke();
         this.ctx.closePath()
+    }
+    update(allObjs) {
+        var that = this
+        var vxTemp = 0
+        var vyTemp = 0
+        var distX = 0
+        var distY = 0
+        var distSq = 0
+        var dist = 0
+        var force = 0
+
+        allObjs.forEach(function(obj) {
+            if(obj != that){
+                distX = Math.abs(that.x - obj.x)
+                distY = Math.abs(that.y - obj.y)
+                distSq = distX*distX + distY*distY;
+                dist = Math.sqrt(distSq);
+                force = gravConst*that.mass*obj.mass/distSq;
+                
+                if((that.x < obj.x) && (that.y < obj.y)) { //top-left
+                    vxTemp += force * distX / dist;
+                    vyTemp += force * distY / dist;
+                } else if((that.x < obj.x) && (that.y > obj.y)) { //bottom-left
+                    vxTemp += force * distX / dist;
+                    vyTemp += -1*force * distY / dist;
+                } else if((that.x > obj.x) && (that.y > obj.y)) { //bottom-right
+                    vxTemp += -1*force * distX / dist;
+                    vyTemp += -1*force * distY / dist;
+                } else if((that.x > obj.x) && (that.y < obj.y)) { //top-right
+                    vxTemp += -1*force * distX / dist;
+                    vyTemp += force * distY / dist;
+                }
+            } 
+        })
+
+        this.vx += vxTemp
+        this.vy += vyTemp
+        this.x += this.vx
+        this.y += this.vy
     }
 }

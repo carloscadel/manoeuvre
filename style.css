@@ -7,6 +7,6 @@ body {
 
 canvas {
     display: block;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     margin: 0 auto;
 }
