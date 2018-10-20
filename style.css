@@ -1,11 +1,12 @@
 body {
     /* background-color: rgb(45, 45, 45); */
-    color: white;
     display: flex;
+    color: white;
     justify-content: center;
 }
 
 canvas {
+    display: block;
     border: 1px solid grey;
     margin: 0 auto;
 }
