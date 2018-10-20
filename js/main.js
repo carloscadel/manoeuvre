@@ -7,6 +7,8 @@ var bg = new Background(ctx)
 var planet = new Planet(ctx)
 var spaceShip = new SpaceShip(ctx)
 
+
+
 setInterval(function() {
     update()
     drawEverything()
@@ -14,7 +16,7 @@ setInterval(function() {
 
 function update() {
     bg.update()
-    planet.update()
+    // planet.update()
 }
 
 function drawEverything() {
