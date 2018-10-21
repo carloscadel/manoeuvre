@@ -1,11 +1,82 @@
 class SpaceShip {
-    constructor(ctx, size = 30, color = 'orange') {
-
-    }
-    update() {
-        
+    constructor(ctx, x, y, size, vx = 2, vy = 2, color = 'grey', fixedPos = false) {
+        this.ctx = ctx
+        this.x = x
+        this.y = y
+        this.vx = vx
+        this.vy = vy
+        this.size = size
+        this.color = color
+        this.mass = this.size
+        this.fixedPos = fixedPos
     }
     draw() {
+        var size = this.size
+        var x = this.x
+        var y = this.y
 
+        this.ctx.save()
+        this.ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+        this.gradient = ctx.createLinearGradient(x-size, 0, x+size, 0)
+        this.gradient.addColorStop(0, this.color);
+        this.gradient.addColorStop(0.5, 'lightgrey');
+        this.gradient.addColorStop(1, this.color);
+        this.ctx.fillStyle = this.gradient;
+        this.ctx.shadowBlur = 0.5*size;
+        this.ctx.shadowColor = "black";
+        //draw the circle
+        this.ctx.beginPath()
+        this.ctx.moveTo(x, y+size)
+        this.ctx.lineTo(x + size, y)
+        this.ctx.lineTo(x, y-2*size)
+        this.ctx.lineTo(x-size, y)
+        this.ctx.lineTo(x, y+size)
+        this.ctx.arc(x, y+size, size, -1*pi/4, 2*Math.PI, false);
+        this.ctx.lineTo(x, y+size)
+        this.ctx.fill()
+        // this.ctx.stroke();
+        this.ctx.closePath()
+        this.ctx.restore()
+    }
+    update(allObjs) {
+        if(this.fixedPos != true){
+            var that = this
+            var vxTemp = 0
+            var vyTemp = 0
+            var distX = 0
+            var distY = 0
+            var distSq = 0
+            var dist = 0
+            var force = 0
+    
+            allObjs.forEach(function(obj) {
+                if(obj != that){
+                    distX = Math.abs(that.x - obj.x)
+                    distY = Math.abs(that.y - obj.y)
+                    distSq = distX*distX + distY*distY;
+                    dist = Math.sqrt(distSq);
+                    force = gravConst*that.mass*obj.mass/distSq;
+                    
+                    if((that.x < obj.x) && (that.y < obj.y)) { //top-left
+                        vxTemp += force * distX / dist;
+                        vyTemp += force * distY / dist;
+                    } else if((that.x < obj.x) && (that.y > obj.y)) { //bottom-left
+                        vxTemp += force * distX / dist;
+                        vyTemp += -1*force * distY / dist;
+                    } else if((that.x > obj.x) && (that.y > obj.y)) { //bottom-right
+                        vxTemp += -1*force * distX / dist;
+                        vyTemp += -1*force * distY / dist;
+                    } else if((that.x > obj.x) && (that.y < obj.y)) { //top-right
+                        vxTemp += -1*force * distX / dist;
+                        vyTemp += force * distY / dist;
+                    }
+                } 
+            })
+    
+            this.vx += vxTemp
+            this.vy += vyTemp
+            this.x += this.vx
+            this.y += this.vy
+        }
     }
 }

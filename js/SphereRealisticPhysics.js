@@ -1,3 +1,4 @@
+/* Applied more realistic physics but they don't look as good*/
 class Sphere {
     constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange', fixedPos = false) {
         this.ctx = ctx
@@ -7,8 +8,8 @@ class Sphere {
         this.vy = vy
         this.radius = radius
         this.color = color
-        this.mass = this.radius
-        this.fixedPos = fixedPos
+        this.mass = 0.000001*this.radius
+        this.fixedPos = fixedPos //if the position is fixed the object will not move but will still pull other objects
     }
     draw() {
         this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/15, this.x, this.y, this.radius*2)
@@ -26,7 +27,7 @@ class Sphere {
         this.ctx.closePath()
     }
     update(allObjs) {
-        if(this.fixedPos != true){
+        if(this.fixedPos == false){
             var that = this
             var vxTemp = 0
             var vyTemp = 0
@@ -42,8 +43,8 @@ class Sphere {
                     distY = Math.abs(that.y - obj.y)
                     distSq = distX*distX + distY*distY;
                     dist = Math.sqrt(distSq);
-                    force = gravConst*that.mass*obj.mass/distSq;
-                    
+                    force = gravConst*obj.mass*obj.mass/distSq;
+
                     if((that.x < obj.x) && (that.y < obj.y)) { //top-left
                         vxTemp += force * distX / dist;
                         vyTemp += force * distY / dist;

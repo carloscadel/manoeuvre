@@ -1,29 +1,44 @@
-class Sphere {
-    constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange', fixedPos = false) {
+class SpaceShip {
+    constructor(ctx, x, y, size, vx = 2, vy = 2, color = 'grey', fixedPos = false) {
         this.ctx = ctx
         this.x = x
         this.y = y
         this.vx = vx
         this.vy = vy
-        this.radius = radius
+        this.size = size
         this.color = color
-        this.mass = this.radius
+        this.mass = this.size
         this.fixedPos = fixedPos
     }
     draw() {
-        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/15, this.x, this.y, this.radius*2)
-        this.gradient.addColorStop(0, this.color);
-        this.gradient.addColorStop(1, 'rgb(35, 35, 35)');
-        this.ctx.fillStyle = this.gradient;
-        this.ctx.shadowBlur = 0.35*this.radius;
-        this.ctx.shadowColor = "black";
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
+        var size = this.size
+        this.ctx.save()
         this.ctx.beginPath()
+        // this.ctx.scale(0.2, 0.2)
+        this.gradient = ctx.createLinearGradient(size, 0, 3*size, 0)
+        this.gradient.addColorStop(0, this.color);
+        this.gradient.addColorStop(0.5, 'lightgrey');
+        this.gradient.addColorStop(1, this.color);
+        this.ctx.fillStyle = this.gradient;
+        this.ctx.shadowBlur = 0.25*size;
+        this.ctx.shadowColor = "black";
+        //draw the circle
+        
+        // this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
         this.ctx.moveTo(this.x, this.y)
-        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+        this.ctx.arc(this.x, this.y+size, size, 0, Math.PI*2, true);
+        this.ctx.stroke();
+        //draw the pointy shape
+        this.ctx.moveTo(this.x + size, this.y)
+        this.ctx.lineTo(this.x, this.y-2*size)
+        this.ctx.lineTo(size, 2*size)
+        this.ctx.lineTo(2*size, 3*size)
+        this.ctx.lineTo(3*size, 2*size)
         this.ctx.fill()
         this.ctx.stroke();
         this.ctx.closePath()
+        this.ctx.restore()
     }
     update(allObjs) {
         if(this.fixedPos != true){
