@@ -1,5 +1,6 @@
 body {
-    /* background-color: rgb(45, 45, 45); */
+    /* background-color: rgb(100, 100, 100); */
+    /* background-color: hsl(204, 70%, 41%); */
     display: flex;
     color: white;
     justify-content: center;

@@ -6,9 +6,11 @@ class SpaceShip {
         this.vx = vx
         this.vy = vy
         this.size = size
+        this.radius = size
         this.color = color
         this.mass = this.size
         this.fixedPos = fixedPos
+        this.currentDirection = 0
     }
     draw() {
         var size = this.size
@@ -24,7 +26,11 @@ class SpaceShip {
         this.ctx.fillStyle = this.gradient;
         this.ctx.shadowBlur = 0.5*size;
         this.ctx.shadowColor = "black";
-        //draw the circle
+        
+        this.ctx.translate(x, y)
+        this.ctx.rotate(this.currentDirection)
+        this.ctx.translate(-x, -y)
+
         this.ctx.beginPath()
         this.ctx.moveTo(x, y+size)
         this.ctx.lineTo(x + size, y)
@@ -34,9 +40,9 @@ class SpaceShip {
         this.ctx.arc(x, y+size, size, -1*pi/4, 2*Math.PI, false);
         this.ctx.lineTo(x, y+size)
         this.ctx.fill()
-        // this.ctx.stroke();
         this.ctx.closePath()
         this.ctx.restore()
+    
     }
     update(allObjs) {
         if(this.fixedPos != true){
@@ -78,5 +84,60 @@ class SpaceShip {
             this.x += this.vx
             this.y += this.vy
         }
+    }
+    move(direction) {
+        var sinAngle = Math.abs(Math.sin(this.currentDirection))
+        var cosAngle = Math.abs(Math.cos(this.currentDirection))
+
+        this.ctx.save()
+        switch(direction) {
+            case 'ArrowUp':
+            if((0 <= this.currentDirection) && (this.currentDirection <= Math.PI/2)) {
+                this.vx += 1 * sinAngle
+                this.vy -= 1 * cosAngle
+            } else if((Math.PI/2 <= this.currentDirection) && (this.currentDirection <= Math.PI)) {
+                this.vx += 1 * sinAngle
+                this.vy += 1 * cosAngle
+            } else if((Math.PI <= this.currentDirection) && (this.currentDirection <= 3*Math.PI/2)) {
+                this.vx -= 1 * sinAngle
+                this.vy += 1 * cosAngle
+            } else if((3*Math.PI/2 <= this.currentDirection) && (this.currentDirection <= 2*Math.PI)) {
+                this.vx -= 1 * sinAngle
+                this.vy -= 1 * cosAngle
+            }
+            break;
+            case 'ArrowDown':
+            if((0 <= this.currentDirection) && (this.currentDirection <= Math.PI/2)) {
+                this.vx -= 1 * sinAngle
+                this.vy += 1 * cosAngle
+            } else if((Math.PI/2 <= this.currentDirection) && (this.currentDirection <= Math.PI)) {
+                this.vx -= 1 * sinAngle
+                this.vy -= 1 * cosAngle
+            } else if((Math.PI <= this.currentDirection) && (this.currentDirection <= 3*Math.PI/2)) {
+                this.vx += 1 * sinAngle
+                this.vy -= 1 * cosAngle
+            } else if((3*Math.PI/2 <= this.currentDirection) && (this.currentDirection <= 2*Math.PI)) {
+                this.vx += 1 * sinAngle
+                this.vy += 1 * cosAngle
+            }
+            break;
+            case 'ArrowLeft':
+            this.currentDirection -= pi/4
+                if(this.currentDirection < 0){
+                    this.currentDirection += 2*Math.PI
+                } else if(this.currentDirection >= 2*Math.PI) {
+                    this.currentDirection -= 2*Math.PI
+                }
+            break;
+            case 'ArrowRight':
+            this.currentDirection += pi/4
+            if(this.currentDirection < 0){
+                this.currentDirection += 2*Math.PI
+            } else if(this.currentDirection >= 2*Math.PI) {
+                this.currentDirection -= 2*Math.PI
+            }
+            break;
+        }
+        this.ctx.restore()
     }
 }
