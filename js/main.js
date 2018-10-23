@@ -6,19 +6,19 @@ ctx.canvas.width = window.innerWidth
 ctx.canvas.height = window.innerHeight
 var width = canvas.width
 var height = canvas.height
-
-var gravConst = 3
+var gravConst = 2
 // var gravConst = 6.67e10-11
 const pi = Math.PI
-var osc = 0
-var angle = 0
+
+// var osc = 0
+// var angle = 0
+var goal1 = new Goal(ctx, canvas.width - 100, 100, 200)
 var planet = new Sphere(ctx, canvas.width/2, canvas.height/2, 75, 0, 0, 'rgb(0, 127, 127)', true, false, true)
 var sat1 = new Sphere(ctx, canvas.width/2 - 200, canvas.height/2, 10, 0, -7, 'lightsalmon', false, false, true)
-var sat2 = new Sphere(ctx, canvas.width/2 - 200, canvas.height/2 + 200, 10, 5, 0, 'lightsalmon', false, false, true)
+var sat2 = new Sphere(ctx, canvas.width/2, canvas.height/2 + 200, 10, -7, 0, 'lightsalmon', false, false, true)
 var sat3 = new Sphere(ctx, canvas.width/2 + 200, canvas.height/2, 10, 0, 7, 'lightsalmon', false, false, true)
-var sat4 = new Sphere(ctx, canvas.width/2 + 200, canvas.height/2 - 200, 10, 0, 5, 'lightgreen', false, true, true)
-var spaceShip = new SpaceShip(ctx, 100, 100, 10, 0, 0, 'grey', false)
-var goal1 = new Goal(ctx, canvas.width, 0, 200)
+var sat4 = new Sphere(ctx, canvas.width/2, canvas.height/2 - 200, 10, 7, 0, 'lightgreen', false, true, true, goal1)
+var spaceShip = new SpaceShip(ctx, 100, canvas.height - 100, 10, 0, 0, 'grey', false)
 var bg = new Background(ctx, canvas.width, canvas.height)
 // ctx.translate(ctx.width/2, ctx.height/2)
 // var allObjs = [spaceShip]
@@ -54,8 +54,8 @@ function drawEverything() {
     sat1.draw()
     sat2.draw()
     sat3.draw()
-    sat4.draw()
     goal1.draw(osc)
+    sat4.draw()
     spaceShip.draw()
     bg.update(ctx, 'top')
 }

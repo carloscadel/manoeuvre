@@ -56,7 +56,7 @@ class SpaceShip {
             var force = 0
     
             allObjs.forEach(function(obj) {
-                if(obj != that){
+                if((obj != that) && (obj.isWin == false)){
                     distX = Math.abs(that.x - obj.x)
                     distY = Math.abs(that.y - obj.y)
                     distSq = distX*distX + distY*distY;
@@ -105,6 +105,20 @@ class SpaceShip {
                 this.vx -= 1 * sinAngle
                 this.vy -= 1 * cosAngle
             }
+
+            this.ctx.save()
+            this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
+            this.gradient.addColorStop(0, 'rgba(0, 255, 0, 0.1');
+            this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+            this.ctx.fillStyle = this.gradient;
+            this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
+            this.ctx.beginPath()
+            this.ctx.moveTo(this.x, this.y)
+            this.ctx.arc(this.x, this.y, 201, 0, Math.PI*2, true);
+            this.ctx.fill()
+            this.ctx.closePath()
+            this.ctx.restore()
+
             break;
             case 'ArrowDown':
             if((0 <= this.currentDirection) && (this.currentDirection <= Math.PI/2)) {

@@ -12,14 +12,15 @@ function distance(obj1, obj2) {
     return Math.abs(Math.sqrt(obj2.x - obj1.x) + Math.sqrt(obj2.y - obj1.y))
 }
 
+var oscTargetRadius = 10
+var osc = 0
+var angle = 0
+
 var oscillator = setInterval(function() { 
+    //this is a growing/shrinking oscillator
     angle += Math.PI/200 //denominator controls the speed of the oscillation
     osc = Math.abs(Math.cos(angle))
-}, 1000/60)
-
-
-var oscTargetRadius = 10
-var oscTarget = setInterval(function() {
+    //and this is a grow-and-repeat oscillator
     oscTargetRadius += 1
     if(oscTargetRadius >= 50) {
         oscTargetRadius = 10
