@@ -5,14 +5,15 @@ class Goal {
         this.y = y
         this.radius = radius
         this.color = color
-        this.beta = 0
+        // this.beta = 0
         this.oscillator = 40
-        this.plug = 1
+        // this.plug = 1
         // this.oscillator = Math.abs(Math.cos(this.beta))
     }
     draw(osc) {
         this.ctx.save()
-        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/6, this.x, this.y, this.radius*osc + this.radius/6)
+        // this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/6, this.x, this.y, this.radius*osc + this.radius/6)
+        this.gradient = ctx.createRadialGradient(this.x, this.y, 3, this.x, this.y, 3*10 + 3)
         this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
         this.gradient.addColorStop(0, this.color);
         this.ctx.fillStyle = this.gradient;
@@ -24,22 +25,6 @@ class Goal {
         this.ctx.closePath()
         this.ctx.restore()
 
-        // if(this.plug == 1) {
-        //     while(this.oscillator < 200) {
-        //         this.oscillator += 0.0001
-        //         if(this.oscillator >= 200) {
-        //             this.plug = 0
-        //         }
-        //     }
-        // } else if(this.plug == 0) {
-        //     while(this.oscillator > 40) {
-        //         this.oscillator -= 0.0001
-        //         if(this.oscillator <= 40) {
-        //             this.plug = 1
-        //         }
-        //     }            
-        // }
-        // console.log(this.oscillator)
     }
     update() {
 

@@ -1,5 +1,5 @@
 class Sphere {
-    constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange', fixedPos = false, isTarget = false, hasGravity = true, assignedGoal) {
+    constructor(ctx, x, y, radius, vx = 0, vy = 0, color = 'orange', fixedPos = false, isTarget = false, hasGravity = true, assignedGoal) {
         this.ctx = ctx
         this.x = x
         this.y = y
@@ -52,7 +52,6 @@ class Sphere {
     }
     update(allObjs) {
         var that = this
-
         if(that.fixedPos != true){
             if((that.isTarget == true) && (that.isHooked == true) && (distance(that, that.assignedGoal) <= that.assignedGoal.radius)) {// reduce
                 that.isWin = true
@@ -65,6 +64,7 @@ class Sphere {
                 this.isHooked = true
                 this.x = spaceShip.x
                 this.y = spaceShip.y
+                console.log(allObjs)
             } else {
                 var vxTemp = 0
                 var vyTemp = 0
@@ -74,6 +74,7 @@ class Sphere {
                 var dist = 0
                 var force = 0
                 allObjs.forEach(function(obj) {
+
                     if((obj != that) && (obj.isWin == false) && (obj.hasGravity == true) ){
                         distX = Math.abs(that.x - obj.x)
                         distY = Math.abs(that.y - obj.y)

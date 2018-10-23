@@ -25,30 +25,8 @@ var oscillator = setInterval(function() {
     if(oscTargetRadius >= 50) {
         oscTargetRadius = 10
     }
-    if(spaceShip.fuel > 0) {
-        spaceShip.fuel -= spaceShip.fuelRate/60
-    }
+    // if(spaceShip.fuel > 0) {
+    //     spaceShip.fuel -= spaceShip.fuelRate/60
+    // }
 
 }, 1000/60)
-
-// function drawLimit(ctx, TopBottomLeftRight, spaceShip.x, spaceShip.y) {
-//     var radius = 200
-
-
-//     if(TopBottomLeftRight == 'top') {
-//         ctx.save()
-//         var gradient = ctx.createRadialGradient(spaceShip.x, 0, radius/5, spaceShip.x, 0, radius)
-//         gradient.addColorStop(0, 'red');
-//         gradient.addColorStop(1, 'rgba(255, 255, 255, 0.1');
-//         ctx.fillStyle = gradient;
-//         ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
-//         ctx.beginPath()
-//         ctx.moveTo(spaceShip.x, 0)
-//         ctx.arc(spaceShip.x, 0, radius, 0, Math.PI*2, true);
-//         ctx.fill()
-//         ctx.closePath()
-//         ctx.restore()
-//     }
-
-
-// }
