@@ -6,56 +6,64 @@ class Background {
         this.yTop = 0
         this.yBottom = canvasHeight
     }
-    draw(TopBottomLeftRight) {
+    draw(TopBottomLeftRight, dist) {
         
         var radius = 200
 
+        this.ctx.save()
+        this.ctx.beginPath()
+
         if(TopBottomLeftRight == 'top') {
-            this.ctx.save()
-            this.gradient = ctx.createRadialGradient(spaceShip.x, spaceShip.y, radius/5, spaceShip.x, spaceShip.y, radius)
-            this.gradient.addColorStop(0, 'red');
-            this.gradient.addColorStop(1, 'rgba(0, 255, 0, 0.5');
+            this.gradient = ctx.createRadialGradient(spaceShip.x, this.yTop, radius/5, spaceShip.x, this.yTop, Math.abs(dist + 150))
+            this.ctx.moveTo(spaceShip.x, this.yTop)
+            this.ctx.arc(spaceShip.x, this.yTop, radius, 0, Math.PI*2, true);
+        } else if(TopBottomLeftRight == 'bottom') {
+            this.gradient = ctx.createRadialGradient(spaceShip.x, this.yBottom, radius/5, spaceShip.x, this.yBottom, Math.abs(dist + 150))
+            this.ctx.moveTo(spaceShip.x, this.yBottom)
+            this.ctx.arc(spaceShip.x, this.yBottom, radius, 0, Math.PI*2, true);
+        } else if(TopBottomLeftRight == 'left') {
+            this.gradient = ctx.createRadialGradient(this.xLeft, spaceShip.y, radius/5, this.xLeft, spaceShip.y, Math.abs(dist + 150))
+            this.ctx.moveTo(this.xLeft, spaceShip.y)
+            this.ctx.arc(this.xLeft, spaceShip.y, radius, 0, Math.PI*2, true);
+        } else if(TopBottomLeftRight == 'right') {
+            this.gradient = ctx.createRadialGradient(this.xRight, spaceShip.y, radius/5, this.xRight, spaceShip.y, Math.abs(dist + 150))
+            this.ctx.moveTo(this.xRight, spaceShip.y)
+            this.ctx.arc(this.xRight, spaceShip.y, radius, 0, Math.PI*2, true);
+        }
+        
+            this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.1');
+            this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
             this.ctx.fillStyle = this.gradient;
-            // console.log(this.gradient)
-            this.ctx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
-            this.ctx.beginPath()
-            this.ctx.moveTo(spaceShip.x, 10)
-            this.ctx.arc(spaceShip.x, 10, radius, 0, Math.PI*2, true);
+            // this.ctx.strokeStyle = 'rgba(100, 100, 100, 0)';
             this.ctx.fill()
             this.ctx.closePath()
             this.ctx.restore()
-        }
+        
 
-        // this.ctx.save()
-        // this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/5, this.x, this.y, this.radius)
-        // this.gradient.addColorStop(0, this.color);
-        // this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0.1');
-        // this.ctx.fillStyle = this.gradient;
-        // this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
-        // this.ctx.beginPath()
-        // this.ctx.moveTo(this.x, this.y)
-        // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
-        // this.ctx.fill()
-        // this.ctx.closePath()
-        // this.ctx.restore()
     }
     update() {
         var distTop = spaceShip.y //distance SpaceShip to top border, and so on
         var distBottom = this.yBottom - spaceShip.y
         var distLeft = spaceShip.x
         var distRight = this.xRight - spaceShip.x
-        console.log()
-        if(distTop <= 100) {
-            this.draw(this.ctx, 'top')
+        var dist = ''
+       
+        if(distTop <= 50) {
+            dist = distTop
+            this.draw('top', dist)
+            // console.log('sending top')
         } 
-        if(distBottom <= 100) {
-            this.draw(this.ctx, 'bottom')
+        if(distBottom <= 50) {
+            dist = distBottom
+            this.draw('bottom', dist)
         } 
-        if(distLeft <= 100) {
-            this.draw(this.ctx, 'left')
+        if(distLeft <= 50) {
+            dist = distLeft
+            this.draw('left', dist)
         } 
-        if(distRight <= 100) {
-            this.draw(this.ctx, 'right')
+        if(distRight <= 50) {
+            dist = distRight
+            this.draw('right', dist)
         } 
 
 

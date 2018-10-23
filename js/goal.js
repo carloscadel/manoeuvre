@@ -1,20 +1,19 @@
 class Goal {
-    constructor(ctx, x, y, radius, color = 'rgba(0, 255, 0, 0.5)', osc) {
+    constructor(ctx, x, y, radius, color = 'rgba(0, 255, 0, 0.1)', osc) {
         this.ctx = ctx
         this.x = x
         this.y = y
         this.radius = radius
         this.color = color
         this.beta = 0
-        this.oscillator = 40
         this.plug = 1
         // this.oscillator = Math.abs(Math.cos(this.beta))
     }
     draw(osc) {
         this.ctx.save()
-        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/5, this.x, this.y, this.radius*osc+60)
-        this.gradient.addColorStop(0, this.color);
-        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0.1');
+        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/5, this.x, this.y, this.radius*osc+40)
+        this.gradient.addColorStop(0, 'rgba(255, 255, 255, 0');
+        this.gradient.addColorStop(1, this.color);
         this.ctx.fillStyle = this.gradient;
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
         this.ctx.beginPath()
@@ -39,7 +38,6 @@ class Goal {
         //         }
         //     }            
         // }
-        console.log(this.oscillator)
     }
     update() {
 
