@@ -11,6 +11,10 @@ class SpaceShip {
         this.mass = this.size
         this.fixedPos = fixedPos
         this.currentDirection = 0
+        this.fuelBarX = 25
+        this.fuelBarY = this.ctx.canvas.height - 25
+        this.fuel = 100 //up to 100
+        this.fuelRate = 1.5 //speed at what the fuel is consumed
     }
     draw() {
         var size = this.size
@@ -40,6 +44,16 @@ class SpaceShip {
         this.ctx.arc(x, y+size, size, -1*pi/4, 2*Math.PI, false);
         this.ctx.lineTo(x, y+size)
         this.ctx.fill()
+        this.ctx.closePath()
+        this.ctx.restore()
+
+        //drawing the fuel bar, first the grey one and then the coloured one
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.fillStyle = 'rgba(211, 211, 211, 0.3'
+        this.ctx.fillRect(this.fuelBarX, this.fuelBarY, 500, 5)
+        this.ctx.fillStyle = 'rgba(127,255,212, 0.5'
+        this.ctx.fillRect(this.fuelBarX, this.fuelBarY, this.fuel * 5, 5)
         this.ctx.closePath()
         this.ctx.restore()
     

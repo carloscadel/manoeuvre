@@ -9,7 +9,7 @@ function checkIfCollide(obj1, obj2) {
 }
 
 function distance(obj1, obj2) {
-    return Math.abs(Math.sqrt(obj2.x - obj1.x) + Math.sqrt(obj2.y - obj1.y))
+    return Math.sqrt(Math.pow((obj2.x - obj1.x), 2) + Math.pow((obj2.y - obj1.y), 2))
 }
 
 var oscTargetRadius = 10
@@ -25,6 +25,10 @@ var oscillator = setInterval(function() {
     if(oscTargetRadius >= 50) {
         oscTargetRadius = 10
     }
+    if(spaceShip.fuel > 0) {
+        spaceShip.fuel -= spaceShip.fuelRate/60
+    }
+
 }, 1000/60)
 
 // function drawLimit(ctx, TopBottomLeftRight, spaceShip.x, spaceShip.y) {
