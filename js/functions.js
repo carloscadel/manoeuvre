@@ -12,10 +12,19 @@ function distance(obj1, obj2) {
     return Math.abs(Math.sqrt(obj2.x - obj1.x) + Math.sqrt(obj2.y - obj1.y))
 }
 
-var oscillator = setInterval(function() {
+var oscillator = setInterval(function() { 
     angle += Math.PI/200 //denominator controls the speed of the oscillation
     osc = Math.abs(Math.cos(angle))
-}, 1000/50)
+}, 1000/60)
+
+
+var oscTargetRadius = 10
+var oscTarget = setInterval(function() {
+    oscTargetRadius += 1
+    if(oscTargetRadius >= 50) {
+        oscTargetRadius = 10
+    }
+}, 1000/60)
 
 // function drawLimit(ctx, TopBottomLeftRight, spaceShip.x, spaceShip.y) {
 //     var radius = 200

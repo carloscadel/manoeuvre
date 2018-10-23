@@ -1,5 +1,5 @@
 class Sphere {
-    constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange', fixedPos = false, isGoal = false, hasGravity = true) {
+    constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange', fixedPos = false, isTarget = false, hasGravity = true) {
         this.ctx = ctx
         this.x = x
         this.y = y
@@ -9,11 +9,12 @@ class Sphere {
         this.color = color
         this.mass = this.radius //just simplifying
         this.fixedPos = fixedPos
-        this.isGoal = isGoal
+        this.isTarget = isTarget
         this.isHooked = false
         this.hasGravity = hasGravity
     }
     draw() {
+        if(this.isTarget == true) { this.drawTarget() }
         this.ctx.save()
         this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/15, this.x, this.y, this.radius*2)
         this.gradient.addColorStop(0, this.color);
@@ -29,16 +30,17 @@ class Sphere {
         this.ctx.stroke();
         this.ctx.closePath()
         this.ctx.restore()
+
     }
 
     update(allObjs) {
         var that = this
 
         if(that.fixedPos != true){
-            if((that.isGoal == true) && (that.isHooked == true)) {// reduce
+            if((that.isTarget == true) && (that.isHooked == true)) {// reduce
                     this.x = spaceShip.x
                     this.y = spaceShip.y
-            } else if((that.isGoal == true) && (distance(that, spaceShip) < spaceShip.size)) {
+            } else if((that.isTarget == true) && (distance(that, spaceShip) < spaceShip.size)) {
                     this.isHooked = true
                     this.x = spaceShip.x
                     this.y = spaceShip.y
@@ -80,5 +82,21 @@ class Sphere {
             }
             
         }
+    }
+
+    drawTarget() {
+        this.ctx.save()
+        this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
+        this.gradient.addColorStop(0, 'rgba(0, 255, 0, 0.1');
+        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+        this.ctx.fillStyle = this.gradient;
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
+        this.ctx.beginPath()
+        this.ctx.moveTo(this.x, this.y)
+        this.ctx.arc(this.x, this.y, 201, 0, Math.PI*2, true);
+        this.ctx.fill()
+        this.ctx.closePath()
+        this.ctx.restore()
+
     }
 }

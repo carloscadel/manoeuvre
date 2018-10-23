@@ -1,5 +1,5 @@
 class Goal {
-    constructor(ctx, x, y, radius, color = 'rgba(0, 255, 0, 0.1)', osc) {
+    constructor(ctx, x, y, radius, color = 'rgba(0, 255, 0, 0.2)', osc) {
         this.ctx = ctx
         this.x = x
         this.y = y
@@ -12,8 +12,8 @@ class Goal {
     draw(osc) {
         this.ctx.save()
         this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/5, this.x, this.y, this.radius*osc+40)
-        this.gradient.addColorStop(0, 'rgba(255, 255, 255, 0');
-        this.gradient.addColorStop(1, this.color);
+        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+        this.gradient.addColorStop(0, this.color);
         this.ctx.fillStyle = this.gradient;
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
         this.ctx.beginPath()
