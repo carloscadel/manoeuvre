@@ -12,21 +12,27 @@ function distance(obj1, obj2) {
     return Math.sqrt(Math.pow((obj2.x - obj1.x), 2) + Math.pow((obj2.y - obj1.y), 2))
 }
 
+
 var oscTargetRadius = 10
 var osc = 0
 var angle = 0
 
 var oscillator = setInterval(function() { 
-    //this is a growing/shrinking oscillator
+    //this is a growing/shrinking oscillator for the goals
     angle += Math.PI/200 //denominator controls the speed of the oscillation
-    osc = Math.abs(Math.cos(angle))
+    
+    for(let i = 0; i < game.goals.length; i++){
+        game.goals[i].oscillator = Math.abs(Math.cos(angle))
+    }
+
     //and this is a grow-and-repeat oscillator
     oscTargetRadius += 1
     if(oscTargetRadius >= 50) {
         oscTargetRadius = 10
     }
-    // if(spaceShip.fuel > 0) {
-    //     spaceShip.fuel -= spaceShip.fuelRate/60
-    // }
-
+    if(game.spaceShip.fuel > 0) {
+        game.spaceShip.fuel -= game.spaceShip.fuelRate/60
+    }
+    
+    // console.log(game.goals[0].oscillator)
 }, 1000/60)

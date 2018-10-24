@@ -1,8 +1,8 @@
 class Sphere {
-    constructor(ctx, x, y, radius, vx = 0, vy = 0, color = 'orange', fixedPos = false, isTarget = false, hasGravity = true, assignedIndex) {
+    constructor(ctx, x, y, radius, vx = 2, vy = 2, color = 'orange', fixedPos = false, isTarget = false, hasGravity = true, assignedGoal) {
         this.ctx = ctx
-        this.x = ctx.canvas.width * x
-        this.y = ctx.canvas.height * y
+        this.x = x
+        this.y = y
         this.vx = vx
         this.vy = vy
         this.radius = radius
@@ -10,7 +10,7 @@ class Sphere {
         this.mass = this.radius //just simplifying
         this.fixedPos = fixedPos
         this.isTarget = isTarget
-        this.assignedIndex = assignedIndex
+        this.assignedGoal = assignedGoal
         this.isHooked = false
         this.hasGravity = hasGravity
         this.isWin = false
@@ -35,39 +35,21 @@ class Sphere {
 
     }
 
-    drawTarget() {
-        this.ctx.save()
-        this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
-        this.gradient.addColorStop(0, 'rgba(0, 255, 0, 0.1');
-        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
-        this.ctx.fillStyle = this.gradient;
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
-        this.ctx.beginPath()
-        this.ctx.moveTo(this.x, this.y)
-        this.ctx.arc(this.x, this.y, 201, 0, Math.PI*2, true);
-        this.ctx.fill()
-        this.ctx.closePath()
-        this.ctx.restore()
-
-    }
     update(allObjs) {
         var that = this
-        if(this.assignedIndex != undefined) {
-            this.assignedGoal = game.goals[this.assignedIndex]
-        }
+
         if(that.fixedPos != true){
-            if((this.assignedGoal != undefined) && (that.isTarget == true) && (that.isHooked == true) && (distance(that, that.assignedGoal) <= that.assignedGoal.radius)) {// reduce
+            if((that.isTarget == true) && (that.isHooked == true) && (distance(that, that.assignedGoal) <= that.assignedGoal.radius)) {// reduce
                 that.isWin = true
                 this.x = this.assignedGoal.x
                 this.y = this.assignedGoal.y
             } else if((that.isTarget == true) && (that.isHooked == true) && (that.isWin == false)) {// reduce
-                this.x = game.spaceShip.x
-                this.y = game.spaceShip.y
-            } else if((that.isTarget == true) && (distance(that, game.spaceShip) < game.spaceShip.size) && (that.isWin == false)) {
+                this.x = spaceShip.x
+                this.y = spaceShip.y
+            } else if((that.isTarget == true) && (distance(that, spaceShip) < spaceShip.size) && (that.isWin == false)) {
                 this.isHooked = true
-                this.x = game.spaceShip.x
-                this.y = game.spaceShip.y
-                console.log(allObjs)
+                this.x = spaceShip.x
+                this.y = spaceShip.y
             } else {
                 var vxTemp = 0
                 var vyTemp = 0
@@ -77,7 +59,6 @@ class Sphere {
                 var dist = 0
                 var force = 0
                 allObjs.forEach(function(obj) {
-
                     if((obj != that) && (obj.isWin == false) && (obj.hasGravity == true) ){
                         distX = Math.abs(that.x - obj.x)
                         distY = Math.abs(that.y - obj.y)
@@ -109,4 +90,19 @@ class Sphere {
         }
     }
 
+    drawTarget() {
+        this.ctx.save()
+        this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
+        this.gradient.addColorStop(0, 'rgba(0, 255, 0, 0.1');
+        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+        this.ctx.fillStyle = this.gradient;
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
+        this.ctx.beginPath()
+        this.ctx.moveTo(this.x, this.y)
+        this.ctx.arc(this.x, this.y, 201, 0, Math.PI*2, true);
+        this.ctx.fill()
+        this.ctx.closePath()
+        this.ctx.restore()
+
+    }
 }

@@ -20,7 +20,6 @@ class SpaceShip {
         var size = this.size
         var x = this.x
         var y = this.y
-        // console.log(this.currentDirection)
 
         this.ctx.save()
         this.ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
@@ -35,6 +34,7 @@ class SpaceShip {
         this.ctx.translate(x, y)
         this.ctx.rotate(this.currentDirection)
         this.ctx.translate(-x, -y)
+
         this.ctx.beginPath()
         this.ctx.moveTo(x, y+size)
         this.ctx.lineTo(x + size, y)
@@ -56,60 +56,6 @@ class SpaceShip {
         this.ctx.fillRect(this.fuelBarX, this.fuelBarY, this.fuel * 5, 5)
         this.ctx.closePath()
         this.ctx.restore()
-
-        //Drawing the red glow by the edges
-        var distTop = this.y //distance to top border, and so on
-        var distBottom = this.ctx.canvas.height - this.y
-        var distLeft = this.x
-        var distRight = this.ctx.canvas.width - this.x
-        var dist = 0
-        var edge = ''
-        if(distTop <= 75) {
-            dist = distTop
-            edge = 'top'
-        } 
-        if(distBottom <= 75) {
-            dist = distBottom
-            edge = 'bottom'
-        } 
-        if(distLeft <= 75) {
-            dist = distLeft
-            edge = 'left'
-        } 
-        if(distRight <= 75) {
-            dist = distRight
-            edge = 'right'
-        } 
-        var radius = 200
-        
-        this.ctx.save()
-        this.ctx.beginPath()
-        
-        if(edge == 'top') {
-            this.gradient = ctx.createRadialGradient(this.x, 0, radius/5, this.x, 0, Math.abs(dist + radius/5))
-            this.ctx.moveTo(this.x, 0)
-            this.ctx.arc(this.x, 0, radius, 0, Math.PI*2, true);
-        } else if(edge == 'bottom') {
-            this.gradient = ctx.createRadialGradient(this.x, this.ctx.canvas.height, radius/5, this.x, this.ctx.canvas.height, Math.abs(dist + radius/5))
-            this.ctx.moveTo(this.x, this.ctx.canvas.height)
-            this.ctx.arc(this.x, this.ctx.canvas.height, radius, 0, Math.PI*2, true);
-        } else if(edge == 'left') {
-            this.gradient = ctx.createRadialGradient(0, this.y, radius/5, 0, this.y, Math.abs(dist + radius/5))
-            this.ctx.moveTo(0, this.y)
-            this.ctx.arc(0, this.y, radius, 0, Math.PI*2, true);
-        } else if(edge == 'right') {
-            this.gradient = ctx.createRadialGradient(this.ctx.canvas.width, this.y, radius/5, this.ctx.canvas.width, this.y, Math.abs(dist + radius/5))
-            this.ctx.moveTo(this.ctx.canvas.width, this.y)
-            this.ctx.arc(this.ctx.canvas.width, this.y, radius, 0, Math.PI*2, true);
-        }
-        
-            this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.2');
-            this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
-            this.ctx.fillStyle = this.gradient;
-            // this.ctx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
-            this.ctx.fill()
-            this.ctx.closePath()
-            this.ctx.restore()
     
     }
     update(allObjs) {
@@ -152,15 +98,12 @@ class SpaceShip {
             this.x += this.vx
             this.y += this.vy
         }
-        
     }
     move(direction) {
-        var that = this
-        var sinAngle = Math.abs(Math.sin(that.currentDirection))
-        var cosAngle = Math.abs(Math.cos(that.currentDirection))
-        
-        this.ctx.save()
+        var sinAngle = Math.abs(Math.sin(this.currentDirection))
+        var cosAngle = Math.abs(Math.cos(this.currentDirection))
 
+        this.ctx.save()
         switch(direction) {
             case 'ArrowUp':
             if((0 <= this.currentDirection) && (this.currentDirection <= Math.PI/2)) {
@@ -176,11 +119,21 @@ class SpaceShip {
                 this.vx -= 1 * sinAngle
                 this.vy -= 1 * cosAngle
             }
-            console.log(direction)
-            console.log(this.vy)
+
+            this.ctx.save()
+            this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
+            this.gradient.addColorStop(0, 'rgba(0, 255, 0, 0.1');
+            this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+            this.ctx.fillStyle = this.gradient;
+            this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
+            this.ctx.beginPath()
+            this.ctx.moveTo(this.x, this.y)
+            this.ctx.arc(this.x, this.y, 201, 0, Math.PI*2, true);
+            this.ctx.fill()
+            this.ctx.closePath()
+            this.ctx.restore()
 
             break;
-
             case 'ArrowDown':
             if((0 <= this.currentDirection) && (this.currentDirection <= Math.PI/2)) {
                 this.vx -= 1 * sinAngle
@@ -196,7 +149,6 @@ class SpaceShip {
                 this.vy += 1 * cosAngle
             }
             break;
-
             case 'ArrowLeft':
             this.currentDirection -= pi/4
                 if(this.currentDirection < 0){
@@ -205,7 +157,6 @@ class SpaceShip {
                     this.currentDirection -= 2*Math.PI
                 }
             break;
-
             case 'ArrowRight':
             this.currentDirection += pi/4
             if(this.currentDirection < 0){
@@ -216,8 +167,5 @@ class SpaceShip {
             break;
         }
         this.ctx.restore()
-
-        
-
     }
 }

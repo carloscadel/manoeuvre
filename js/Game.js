@@ -4,14 +4,14 @@ class Game {
         this.goals = []
         this.planets = []
         this.sats = []
-        
         this.spaceShip = new SpaceShip(this.ctx, level.spaceship.x, level.spaceship.y, level.spaceship.size, level.spaceship.vx, level.spaceship.vy, level.spaceship.color, level.spaceship.fixedPos)
+        this.bg = new Background(this.ctx, this.ctx.canvas.width, this.ctx.canvas.height)
 
-        console.log(level)
-        console.log(this.spaceShip)
+        // console.log(level)
+        // console.log(this.spaceShip)
 
         for (var i = 0; i < level.goals.length; i++) {
-            var goal = new Goal(this.ctx, level.goals[i].x, level.goals[i].y, level.goals[i].color)
+            var goal = new Goal(level.goals[i].name, this.ctx, level.goals[i].x, level.goals[i].y, level.goals[i].radius, level.goals[i].color, osc)
             this.goals.push(goal)
         }
         for (var j = 0; j < level.planets.length; j++) {
@@ -19,11 +19,15 @@ class Game {
             this.planets.push(planet)
         }
         for (var k = 0; k < level.sats.length; k++) {
-            this.sats.push(new Sphere(this.ctx, level.sats[k].x, level.sats[k].y, level.sats[k].radius, level.sats[k].vx, level.sats[k].vy, level.sats[k].color, level.sats[k].fixedPos, level.sats[k].isTarget, level.sats[k].hasGravity, level.sats[k].assignedGoal))
+            // console.log( level.sats[k].assignedGoal)
+            var sat = new Sphere(this.ctx, level.sats[k].x, level.sats[k].y, level.sats[k].radius, level.sats[k].vx, level.sats[k].vy, level.sats[k].color, level.sats[k].fixedPos, level.sats[k].isTarget, level.sats[k].hasGravity, level.sats[k].assignedGoal) 
+            console.log(sat)
+            this.sats.push(sat)
         }
 
-
         this.allObjs = [...this.planets, ...this.sats]
+
+        
         // console.log('allObjs', this.allObjs)
   
     }
@@ -40,6 +44,9 @@ class Game {
             this.sats[k].draw()
         }
         this.spaceShip.draw()
+        // this.bg.draw()
+        
+
     }
 
     update() {
@@ -53,6 +60,7 @@ class Game {
             this.sats[k].update(this.allObjs)
         }
         this.spaceShip.update(this.allObjs)
+        this.bg.update()
     }
 
     start() {

@@ -1,26 +1,29 @@
 class Goal {
-    constructor(ctx, x, y, radius = 20, color = 'rgba(0, 255, 0, 0.3)', osc) {
+    constructor(name, ctx, x, y, radius = 20, color = 'rgba(0, 255, 0, 0.3)') {
+        this.name = name
         this.ctx = ctx
-        this.x = x
-        this.y = y
+        this.x = ctx.canvas.width * x
+        this.y = ctx.canvas.height * y
         this.radius = radius
         this.color = color
-        // this.beta = 0
-        this.oscillator = 40
+        this.angle = 0
+        this.oscillator = 0
         // this.plug = 1
         // this.oscillator = Math.abs(Math.cos(this.beta))
     }
-    draw(osc) {
+    draw() {
         this.ctx.save()
         // this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/6, this.x, this.y, this.radius*osc + this.radius/6)
-        this.gradient = ctx.createRadialGradient(this.x, this.y, 3, this.x, this.y, 3*10 + 3)
+        // console.log(this.oscillator)
+        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/2, this.x, this.y, this.radius*this.oscillator + this.radius)
+        // console.log(this.gradient)
         this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
         this.gradient.addColorStop(0, this.color);
         this.ctx.fillStyle = this.gradient;
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
         this.ctx.beginPath()
         this.ctx.moveTo(this.x, this.y)
-        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+        this.ctx.arc(this.x, this.y, this.radius*2, 0, Math.PI*2, true);
         this.ctx.fill()
         this.ctx.closePath()
         this.ctx.restore()
@@ -29,5 +32,14 @@ class Goal {
     update() {
 
 
+    }
+    oscillator() {
+        
+        var oscillator = setInterval(function() { 
+        //this is a growing/shrinking oscillator
+        this.angle += Math.PI/200 //denominator controls the speed of the oscillation
+        return this.osc = Math.abs(Math.cos(this.angle)) //osc will be between 0 and 1
+
+        }, 1000/60)
     }
 }
