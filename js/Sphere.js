@@ -39,7 +39,7 @@ class Sphere {
     drawTarget() {
         this.ctx.save()
         this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
-        this.gradient.addColorStop(0, 'rgba(0, 255, 0, 0.1');
+        this.gradient.addColorStop(0, 'rgba(152, 206, 0, 0.1');
         this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
         this.ctx.fillStyle = this.gradient;
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
@@ -61,6 +61,12 @@ class Sphere {
                 that.isWin = true
                 this.x = this.assignedGoal.x
                 this.y = this.assignedGoal.y
+                var winCheck = allObjs.filter(function(sat) {
+                    return (sat.isTarget == true && sat.isWin == false)
+                })
+                if(winCheck.length == 0) {
+                    game.stop('win')
+                }
             } else if((that.isTarget == true) && (that.isHooked == true) && (that.isWin == false)) {// reduce
                 this.x = game.spaceShip.x
                 this.y = game.spaceShip.y
@@ -68,7 +74,7 @@ class Sphere {
                 this.isHooked = true
                 this.x = game.spaceShip.x
                 this.y = game.spaceShip.y
-                console.log(allObjs)
+                // console.log(allObjs)
             } else {
                 var vxTemp = 0
                 var vyTemp = 0

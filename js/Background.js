@@ -6,7 +6,7 @@ class Background {
         this.yTop = 0
         this.yBottom = canvasHeight
     }
-    draw(TopBottomLeftRight, dist) {
+    draw() {
 
     }
     update() {

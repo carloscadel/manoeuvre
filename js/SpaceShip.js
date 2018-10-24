@@ -15,8 +15,9 @@ class SpaceShip {
         this.fuelBarY = 25
         this.fuel = 100 //up to 100
         this.fuelRate = 1.5 //speed at what the fuel is consumed
+        this.oscillator = 0
     }
-    draw() {
+    draw(direction) {
         var size = this.size
         var x = this.x
         var y = this.y
@@ -50,17 +51,17 @@ class SpaceShip {
         //drawing the fuel bar, first the grey one and then the coloured one
         this.ctx.save()
         this.ctx.beginPath()
-        this.ctx.fillStyle = 'rgba(211, 211, 211, 0.3'
+        this.ctx.fillStyle = 'rgba(211, 211, 211, 0.3)'
         this.ctx.fillRect(this.fuelBarX, this.fuelBarY, 500, 5)
-        this.ctx.fillStyle = 'rgba(127,255,212, 0.5'
+        this.ctx.fillStyle = 'rgba(181, 189, 137, 1)'
         if(this.fuel < 75) {
-            this.ctx.fillStyle = 'rgba(127,255,0, 0.5'
+            this.ctx.fillStyle = 'rgba(223, 190, 153, 1)'
         }
         if(this.fuel < 50) {
-            this.ctx.fillStyle = 'rgba(255, 255, 0, 0.5'
+            this.ctx.fillStyle = 'rgba(236, 195, 11, 1)'
         }
         if(this.fuel < 25) {
-            this.ctx.fillStyle = 'rgba(255, 0, 0, 0.5'
+            this.ctx.fillStyle = 'rgba(238, 99, 82, 1)'
         }
         this.ctx.fillRect(this.fuelBarX, this.fuelBarY, this.fuel * 5, 5)
         this.ctx.closePath()
@@ -99,37 +100,57 @@ class SpaceShip {
             this.gradient = ctx.createRadialGradient(this.x, 0, radius/5, this.x, 0, Math.abs(dist) + radius/2)
             this.ctx.moveTo(this.x, 0)
             this.ctx.arc(this.x, 0, radius, 0, Math.PI*2, true);
-        } else if(edge == 'bottom') {
+        } 
+        if(edge == 'bottom') {
             this.gradient = ctx.createRadialGradient(this.x, this.ctx.canvas.height, radius/5, this.x, this.ctx.canvas.height, Math.abs(dist) + radius/2)
             this.ctx.moveTo(this.x, this.ctx.canvas.height)
             this.ctx.arc(this.x, this.ctx.canvas.height, radius, 0, Math.PI*2, true);
-        } else if(edge == 'left') {
+        } 
+        if(edge == 'left') {
             this.gradient = ctx.createRadialGradient(0, this.y, radius/5, 0, this.y, Math.abs(dist) + radius/2)
             this.ctx.moveTo(0, this.y)
             this.ctx.arc(0, this.y, radius, 0, Math.PI*2, true);
-        } else if(edge == 'right') {
+        } 
+        if(edge == 'right') {
             this.gradient = ctx.createRadialGradient(this.ctx.canvas.width, this.y, radius/5, this.ctx.canvas.width, this.y, Math.abs(dist) + radius/2)
             this.ctx.moveTo(this.ctx.canvas.width, this.y)
             this.ctx.arc(this.ctx.canvas.width, this.y, radius, 0, Math.PI*2, true);
         }
         
-            this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.2');
+            this.gradient.addColorStop(0, 'rgba(219, 83, 117, 0.2');
             this.gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0');
             this.ctx.fillStyle = this.gradient;
             // this.ctx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
             this.ctx.fill()
             this.ctx.closePath()
             this.ctx.restore()
+            
+            // direction = 'up'
+            // drawing the throttle glared
+            // if(direction == 'up'){
+            //     this.ctx.save()
+            //     this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius+10)
+            //     console.log(oscTargetRadius)
+            //     this.ctx.moveTo(this.x, this.y)
+            //     this.ctx.arc(this.x, this.y, 100, 0, Math.PI*2, true);        
+            //     this.gradient.addColorStop(0, 'rgba(219, 83, 117, 0.5');
+            //     this.gradient.addColorStop(1, 'rgba(255, 255, 0, 0.5');
+            //     this.ctx.fillStyle = this.gradient;
+            //     // this.ctx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
+            //     this.ctx.fill()
+            //     this.ctx.closePath()
+            //     this.ctx.restore()
+            // }
     
     }
     update(allObjs) {
-        // Game over events
+        // Game Over events
         if((this.x < -1000) || (this.x > this.ctx.canvas.width + 1000) || (this.y < -1000) || (this.y > this.ctx.canvas.height + 1000)) {
-                game.stop(this.ctx, 'boundaries')
+                game.stop('boundaries')
             } else if(this.fuel <= 0) {
-                game.stop(this.ctx, 'fuel')
+                game.stop('fuel')
             }
-        
+        // End of Game Over events
 
         if(this.fixedPos != true){
             var that = this
@@ -194,7 +215,7 @@ class SpaceShip {
                 this.vx -= 1 * sinAngle
                 this.vy -= 1 * cosAngle
             }
-
+            this.draw('up')
             break;
 
             case 'ArrowDown':
@@ -211,6 +232,7 @@ class SpaceShip {
                 this.vx += 1 * sinAngle
                 this.vy += 1 * cosAngle
             }
+            this.draw('down')
             break;
 
             case 'ArrowLeft':
@@ -236,4 +258,5 @@ class SpaceShip {
         
 
     }
+
 }

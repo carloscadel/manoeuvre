@@ -75,13 +75,13 @@ class Game {
 
     }
 
-    stop(ctx, reason) {
+    stop(reason) {
         var that = this
-        
+        this.ctx.save()
+
+        this.ctx.canvas.filter = 'blur(5px) opacity(0.6)'
         switch(reason) {
-            case 'boundaries':
-                
-                
+            case 'boundaries':  
                 game.sats.forEach(function(sat) {
                     sat.vx = 0
                     sat.vy += 0.2
@@ -90,12 +90,31 @@ class Game {
                 game.planets.forEach(function(planet) {
                     planet.hasGravity = false
                 })
-                window.requestAnimationFrame(function() {
-                    that.stop()
-                })
-
-
+                // window.requestAnimationFrame(function() {
+                //     that.stop()
+                // })
             break;
+
+            case 'win':
+                setTimeout(() => {
+                    game.planets.forEach(function(planet) {
+                        planet.hasGravity = false
+                    })
+                    game.sats.forEach(function(sat) {
+                        sat.vx = 0
+                        sat.vy -= 0.2             
+                    })
+                    game.spaceShip.vx = 0
+                    game.spaceShip.vy -= 0.2
+
+                    
+                }, 2000);
+                // window.requestAnimationFrame(function() {
+                //     that.stop()
+                // })
+            break;
+
         }
     }
+
 }

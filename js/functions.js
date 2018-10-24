@@ -26,10 +26,11 @@ var oscillator = setInterval(function() {
     }
 
     //and this is a grow-and-repeat oscillator
-    oscTargetRadius += 1
+    oscTargetRadius += 0.5
     if(oscTargetRadius >= 50) {
         oscTargetRadius = 10
     }
+    
     if(game.spaceShip.fuel > 0) {
         game.spaceShip.fuel -= game.spaceShip.fuelRate/60
     }
