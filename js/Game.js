@@ -26,8 +26,6 @@ class Game {
         }
 
         this.allObjs = [...this.planets, ...this.sats]
-
-        
         // console.log('allObjs', this.allObjs)
   
     }
@@ -45,8 +43,6 @@ class Game {
         }
         this.spaceShip.draw()
         // this.bg.draw()
-        
-
     }
 
     update() {
@@ -67,8 +63,7 @@ class Game {
         var that = this
         this.update()
         this.draw()
-        
-        // window.requestAnimationFrame(that.start)
+
         window.requestAnimationFrame(function() {
             that.start()
         })
@@ -76,10 +71,8 @@ class Game {
     }
 
     stop(reason) {
-        var that = this
         this.ctx.save()
 
-        this.ctx.canvas.filter = 'blur(5px) opacity(0.6)'
         switch(reason) {
             case 'boundaries':  
                 game.sats.forEach(function(sat) {
@@ -90,9 +83,7 @@ class Game {
                 game.planets.forEach(function(planet) {
                     planet.hasGravity = false
                 })
-                // window.requestAnimationFrame(function() {
-                //     that.stop()
-                // })
+
             break;
 
             case 'win':
@@ -109,9 +100,7 @@ class Game {
 
                     
                 }, 2000);
-                // window.requestAnimationFrame(function() {
-                //     that.stop()
-                // })
+
             break;
 
         }

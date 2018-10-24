@@ -124,7 +124,7 @@ class SpaceShip {
             this.ctx.fill()
             this.ctx.closePath()
             this.ctx.restore()
-            
+
             // direction = 'up'
             // drawing the throttle glared
             // if(direction == 'up'){
