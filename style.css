@@ -1,9 +1,9 @@
 body {
     /* background-color: rgb(100, 100, 100); */
     /* background-color: hsl(204, 70%, 41%); */
-    display: flex;
-    color: white;
-    justify-content: center;
+    /* display: flex;
+    flex-flow: column;
+    justify-content: center; */
     padding: 0;
     margin:0
 }
@@ -14,4 +14,28 @@ canvas {
     margin: 0 auto;
     /* color: rgb(255, 127, 80) */
     /* color: light */
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 5em;
+}
+
+#main-section {
+    display: flex;
+    /* flex-flow: column; */
+    justify-content: center;
+
+}
+
+.main-button {
+    font-size: 1.5em;
+    color: white;
+    background-color: rgb(114, 158, 161);
+    border: none;
+    width: 220px;
+    /* padding: 5px 40px; */
+    box-shadow: 0 0 0.5px 10px 'grey';
 }

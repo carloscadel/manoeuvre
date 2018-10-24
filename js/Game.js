@@ -21,7 +21,6 @@ class Game {
         for (var k = 0; k < level.sats.length; k++) {
             // console.log( level.sats[k].assignedGoal)
             var sat = new Sphere(this.ctx, level.sats[k].x, level.sats[k].y, level.sats[k].radius, level.sats[k].vx, level.sats[k].vy, level.sats[k].color, level.sats[k].fixedPos, level.sats[k].isTarget, level.sats[k].hasGravity, level.sats[k].assignedGoal) 
-            console.log(sat)
             this.sats.push(sat)
         }
 
