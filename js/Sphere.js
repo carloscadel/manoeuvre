@@ -14,6 +14,7 @@ class Sphere {
         this.isHooked = false
         this.hasGravity = hasGravity
         this.isWin = false
+        this.grabDistance = 10 //distance added to the size of the spaceship to grab a sat
     }
     draw() {
         if(this.isTarget == true) { this.drawTarget() }
@@ -63,7 +64,7 @@ class Sphere {
             } else if((that.isTarget == true) && (that.isHooked == true) && (that.isWin == false)) {// reduce
                 this.x = game.spaceShip.x
                 this.y = game.spaceShip.y
-            } else if((that.isTarget == true) && (distance(that, game.spaceShip) < game.spaceShip.size) && (that.isWin == false)) {
+            } else if((that.isTarget == true) && (distance(that, game.spaceShip) < (game.spaceShip.size + this.grabDistance)) && (that.isWin == false)) {
                 this.isHooked = true
                 this.x = game.spaceShip.x
                 this.y = game.spaceShip.y

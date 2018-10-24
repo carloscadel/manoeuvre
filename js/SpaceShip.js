@@ -53,6 +53,15 @@ class SpaceShip {
         this.ctx.fillStyle = 'rgba(211, 211, 211, 0.3'
         this.ctx.fillRect(this.fuelBarX, this.fuelBarY, 500, 5)
         this.ctx.fillStyle = 'rgba(127,255,212, 0.5'
+        if(this.fuel < 75) {
+            this.ctx.fillStyle = 'rgba(127,255,0, 0.5'
+        }
+        if(this.fuel < 50) {
+            this.ctx.fillStyle = 'rgba(255, 255, 0, 0.5'
+        }
+        if(this.fuel < 25) {
+            this.ctx.fillStyle = 'rgba(255, 0, 0, 0.5'
+        }
         this.ctx.fillRect(this.fuelBarX, this.fuelBarY, this.fuel * 5, 5)
         this.ctx.closePath()
         this.ctx.restore()
@@ -114,12 +123,14 @@ class SpaceShip {
     
     }
     update(allObjs) {
-        if( this.x < -1000 ||
-            this.x > this.ctx.canvas.width + 1000 ||
-            this.y < -1000 ||
-            this.y > this.ctx.canvas.height + 1000) {
+        // Game over events
+        if((this.x < -1000) || (this.x > this.ctx.canvas.width + 1000) || (this.y < -1000) || (this.y > this.ctx.canvas.height + 1000)) {
                 game.stop(this.ctx, 'boundaries')
+            } else if(this.fuel <= 0) {
+                game.stop(this.ctx, 'fuel')
             }
+        
+
         if(this.fixedPos != true){
             var that = this
             var vxTemp = 0
