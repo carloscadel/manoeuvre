@@ -72,5 +72,30 @@ class Game {
         window.requestAnimationFrame(function() {
             that.start()
         })
+
+    }
+
+    stop(ctx, reason) {
+        var that = this
+        
+        switch(reason) {
+            case 'boundaries':
+                
+                
+                game.sats.forEach(function(sat) {
+                    sat.vx = 0
+                    sat.vy += 0.2
+
+                })
+                game.planets.forEach(function(planet) {
+                    planet.hasGravity = false
+                })
+                window.requestAnimationFrame(function() {
+                    that.stop()
+                })
+
+
+            break;
+        }
     }
 }

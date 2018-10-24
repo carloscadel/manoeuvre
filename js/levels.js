@@ -4,8 +4,8 @@ var levels = [
     {
         name: "Level 1",
         
-        spaceship: {x: 1/8, 
-                    y: 1/8,
+        spaceship: {x: 1/9, 
+                    y: 1/9,
                     size: 10,
                     vx: 0,
                     vy: 0,
@@ -75,12 +75,7 @@ var levels = [
                     y: 1/8, 
                     radius: 30,
                     color: 'rgba(0, 255, 0, 0.3)'
-                },
-                {   name: 'goal1',
-                    x: 7/8, 
-                    y: 7/8, 
-                    radius: 30,
-                    color: 'rgba(0, 255, 0, 0.3)'}]
+                }]
                     
     }
 ]

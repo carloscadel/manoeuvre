@@ -13,12 +13,9 @@ class Goal {
     }
     draw() {
         this.ctx.save()
-        // this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/6, this.x, this.y, this.radius*osc + this.radius/6)
-        // console.log(this.oscillator)
-        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius/2, this.x, this.y, this.radius*this.oscillator + this.radius)
-        // console.log(this.gradient)
-        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+        this.gradient = ctx.createRadialGradient(this.x, this.y, this.radius, this.x, this.y, this.radius*this.oscillator + this.radius + 10)
         this.gradient.addColorStop(0, this.color);
+        this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
         this.ctx.fillStyle = this.gradient;
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0)';
         this.ctx.beginPath()

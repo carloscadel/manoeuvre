@@ -1,8 +1,8 @@
 class SpaceShip {
     constructor(ctx, x, y, size, vx = 2, vy = 2, color = 'grey', fixedPos = false) {
         this.ctx = ctx
-        this.x = x
-        this.y = y
+        this.x = x * this.ctx.canvas.width
+        this.y = y * this.ctx.canvas.height
         this.vx = vx
         this.vy = vy
         this.size = size
@@ -12,7 +12,7 @@ class SpaceShip {
         this.fixedPos = fixedPos
         this.currentDirection = 0
         this.fuelBarX = 25
-        this.fuelBarY = this.ctx.canvas.height - 25
+        this.fuelBarY = 25
         this.fuel = 100 //up to 100
         this.fuelRate = 1.5 //speed at what the fuel is consumed
     }
@@ -64,6 +64,7 @@ class SpaceShip {
         var distRight = this.ctx.canvas.width - this.x
         var dist = 0
         var edge = ''
+
         if(distTop <= 75) {
             dist = distTop
             edge = 'top'
@@ -86,25 +87,25 @@ class SpaceShip {
         this.ctx.beginPath()
         
         if(edge == 'top') {
-            this.gradient = ctx.createRadialGradient(this.x, 0, radius/5, this.x, 0, Math.abs(dist + radius/5))
+            this.gradient = ctx.createRadialGradient(this.x, 0, radius/5, this.x, 0, Math.abs(dist) + radius/2)
             this.ctx.moveTo(this.x, 0)
             this.ctx.arc(this.x, 0, radius, 0, Math.PI*2, true);
         } else if(edge == 'bottom') {
-            this.gradient = ctx.createRadialGradient(this.x, this.ctx.canvas.height, radius/5, this.x, this.ctx.canvas.height, Math.abs(dist + radius/5))
+            this.gradient = ctx.createRadialGradient(this.x, this.ctx.canvas.height, radius/5, this.x, this.ctx.canvas.height, Math.abs(dist) + radius/2)
             this.ctx.moveTo(this.x, this.ctx.canvas.height)
             this.ctx.arc(this.x, this.ctx.canvas.height, radius, 0, Math.PI*2, true);
         } else if(edge == 'left') {
-            this.gradient = ctx.createRadialGradient(0, this.y, radius/5, 0, this.y, Math.abs(dist + radius/5))
+            this.gradient = ctx.createRadialGradient(0, this.y, radius/5, 0, this.y, Math.abs(dist) + radius/2)
             this.ctx.moveTo(0, this.y)
             this.ctx.arc(0, this.y, radius, 0, Math.PI*2, true);
         } else if(edge == 'right') {
-            this.gradient = ctx.createRadialGradient(this.ctx.canvas.width, this.y, radius/5, this.ctx.canvas.width, this.y, Math.abs(dist + radius/5))
+            this.gradient = ctx.createRadialGradient(this.ctx.canvas.width, this.y, radius/5, this.ctx.canvas.width, this.y, Math.abs(dist) + radius/2)
             this.ctx.moveTo(this.ctx.canvas.width, this.y)
             this.ctx.arc(this.ctx.canvas.width, this.y, radius, 0, Math.PI*2, true);
         }
         
             this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.2');
-            this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0');
+            this.gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0');
             this.ctx.fillStyle = this.gradient;
             // this.ctx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
             this.ctx.fill()
@@ -113,6 +114,12 @@ class SpaceShip {
     
     }
     update(allObjs) {
+        if( this.x < -1000 ||
+            this.x > this.ctx.canvas.width + 1000 ||
+            this.y < -1000 ||
+            this.y > this.ctx.canvas.height + 1000) {
+                game.stop(this.ctx, 'boundaries')
+            }
         if(this.fixedPos != true){
             var that = this
             var vxTemp = 0
@@ -176,8 +183,6 @@ class SpaceShip {
                 this.vx -= 1 * sinAngle
                 this.vy -= 1 * cosAngle
             }
-            console.log(direction)
-            console.log(this.vy)
 
             break;
 

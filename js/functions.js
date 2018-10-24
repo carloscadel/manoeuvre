@@ -36,3 +36,16 @@ var oscillator = setInterval(function() {
     
     // console.log(game.goals[0].oscillator)
 }, 1000/60)
+
+var breaker = 1
+// function slowDown() {
+//     var breaker = 1
+//     var gameOver = setInterval(function() {
+//         while(breaker > 0){
+//             return breaker -= 0.0005
+//             console.log(breaker)
+//         }
+//     }, 1000/20)
+
+// }
+
