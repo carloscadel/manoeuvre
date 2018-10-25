@@ -97,16 +97,10 @@ function gameOver(reason) {
             }, 1250);
 
             $('#main-page').click(function() {
-                // $('#retry').fadeOut(500)
-                // $('#main-page').fadeOut(500)
-                // $('.level-transition').fadeOut(500)
-                // if (requestId) {
-                //     window.cancelAnimationFrame(requestId);
-                //     requestId = undefined;
-                // }
                 $('#retry').hide()
                 $('#main-page').hide()
                 $('.level-transition').hide()
+                game.isStarted = false
                 frontPage()
             })
                 
