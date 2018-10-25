@@ -17,25 +17,59 @@ canvas {
 }
 
 h1 {
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 5em;
+    position: absolute;
+    top: 0;
+    left: 100px;
+    text-shadow: 10px 10px 10px 'grey';
+    /* float: left; */
 }
+
+/* .title {
+    text-shadow: 10px 10px 10px 'grey';
+} */
+#introCanvas {
+    /* float: left; */
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    /* width: 100%; */
+}
+
 
 #main-section {
     display: flex;
     /* flex-flow: column; */
     justify-content: center;
+}
 
+#buttons-div {
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    display: flex;
+    flex-flow: column;
 }
 
 .main-button {
-    font-size: 1.5em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
     color: white;
     background-color: rgb(114, 158, 161);
     border: none;
     width: 220px;
+    height: 30px;
     /* padding: 5px 40px; */
-    box-shadow: 0 0 0.5px 10px 'grey';
+    box-shadow: 0 0 15px 10px 'grey';
+    margin: 1px;
+}
+.background {
+    display: flex;
+    justify-content: center;
+    /* float: left; */
+    width: 100%;
+    margin: 0 auto;
 }

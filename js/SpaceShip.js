@@ -48,24 +48,29 @@ class SpaceShip {
         this.ctx.closePath()
         this.ctx.restore()
 
+        
+
         //drawing the fuel bar, first the grey one and then the coloured one
-        this.ctx.save()
-        this.ctx.beginPath()
-        this.ctx.fillStyle = 'rgba(211, 211, 211, 0.3)'
-        this.ctx.fillRect(this.fuelBarX, this.fuelBarY, 500, 5)
-        this.ctx.fillStyle = 'rgba(181, 189, 137, 1)'
-        if(this.fuel < 75) {
-            this.ctx.fillStyle = 'rgba(223, 190, 153, 1)'
+        if(this.ctx.canvas.id != "introCanvas") {
+            this.ctx.save()
+            this.ctx.beginPath()
+            this.ctx.fillStyle = 'rgba(211, 211, 211, 0.3)'
+            this.ctx.fillRect(this.fuelBarX, this.fuelBarY, 500, 5)
+            this.ctx.fillStyle = 'rgba(181, 189, 137, 1)'
+            if(this.fuel < 75) {
+                this.ctx.fillStyle = 'rgba(223, 190, 153, 1)'
+            }
+            if(this.fuel < 50) {
+                this.ctx.fillStyle = 'rgba(236, 195, 11, 1)'
+            }
+            if(this.fuel < 25) {
+                this.ctx.fillStyle = 'rgba(238, 99, 82, 1)'
+            }
+            this.ctx.fillRect(this.fuelBarX, this.fuelBarY, this.fuel * 5, 5)
+            this.ctx.closePath()
+            this.ctx.restore()
         }
-        if(this.fuel < 50) {
-            this.ctx.fillStyle = 'rgba(236, 195, 11, 1)'
-        }
-        if(this.fuel < 25) {
-            this.ctx.fillStyle = 'rgba(238, 99, 82, 1)'
-        }
-        this.ctx.fillRect(this.fuelBarX, this.fuelBarY, this.fuel * 5, 5)
-        this.ctx.closePath()
-        this.ctx.restore()
+
 
         //Drawing the red glow by the edges
         var distTop = this.y //distance to top border, and so on

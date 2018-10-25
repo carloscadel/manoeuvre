@@ -5,56 +5,51 @@ var levels =
     {
         name: "Intro",
         
-        spaceship: {x: 1/9, 
-                    y: 1/9,
+        spaceship: {x: -1/9, 
+                    y: -1/9,
                     size: 10,
                     vx: 0,
                     vy: 0,
                     color: 'grey',
-                    fixedPos: false
+                    fixedPos: true
                 },
 
-        planets: [{ x: 1/2, 
-                    y: 1/2, 
-                    radius: 20,
-                    vx: 0,
-                    vy: 0, 
+        planets: [{ x: 3/4, 
+                    y: 6/8, 
+                    radius: 550,
+                    vx: -0.06,
+                    vy: 0.03, 
                     color: 'rgb(114, 158, 161)',
-                    fixedPos: true,
+                    fixedPos: false,
                     isTarget: false,
                     hasGravity: true}],
 
-        sats:  [
-                {   name: "sat1",
-                    x: 1/2,    
-                    y: 1/4,
-                    radius: 10,
-                    vx: 3,
-                    vy: 0,
-                    color: 'rgb(152, 206, 0)',
-                    fixedPos: false,
-                    isTarget: true,
-                    hasGravity: false,
-                    assignedGoal: 0},
-
-                {   name: "sat2",
-                    x: 1/2,    
-                    y: 3/4,
-                    radius: 10,
-                    vx: -3,
+        sats:  [{   name: "sat1",
+                    x: 3/4, 
+                    y: -1/2, 
+                    radius: 50,
+                    vx: -9.5,
                     vy: 0,
                     color: 'rgb(255, 107, 53)',
                     fixedPos: false,
                     isTarget: false,
                     hasGravity: false,
-                    assignedGoal: 0}],
+                    assignedGoal: undefined
+                // },
+                // {   name: "sat2",
+                //     x: 6/2, 
+                //     y: (-2.5), 
+                //     radius: 50,
+                //     vx: -3,
+                //     vy: 2,
+                //     color: 'rgb(255, 107, 53)',
+                //     fixedPos: false,
+                //     isTarget: false,
+                //     hasGravity: false,
+                //     assignedGoal: undefined
+            }],
 
-        goals: [{   name: 'goal0',
-                    x: 7/8, 
-                    y: 1/8, 
-                    radius: 30,
-                    color: 'rgba(0, 255, 0, 0.3)'
-                }]
+        goals: []
                     
     }, 
     {
