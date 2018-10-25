@@ -19,6 +19,7 @@ ctxIntro.canvas.height = window.innerHeight
 
 
 
+
 //* DO NOT DELETE
 //Levels to be called 
 var game = new Game(ctxIntro, levels[0])//Intro level
@@ -26,8 +27,8 @@ var game = new Game(ctxIntro, levels[0])//Intro level
 // var game = new Game(ctx, levels[2])
 // var game = new Game(ctx, levels[3])
 
-
 game.start()
+
 
 // document.onkeydown = function(e) {
 //     e.preventDefault()
