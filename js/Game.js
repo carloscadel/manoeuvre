@@ -25,6 +25,7 @@ class Game {
         }
 
         this.allObjs = [...this.planets, ...this.sats]
+        this.isStarted = false
         // console.log('allObjs', this.allObjs)
   
     }
@@ -58,18 +59,23 @@ class Game {
         this.bg.update()
     }
 
-    start() {
+    start(isTheFirstStart = true) {
+        if (isTheFirstStart) {
+            this.isStarted = true
+        }
         var that = this
         this.update()
         this.draw()
 
-        window.requestAnimationFrame(function() {
-            that.start()
-        })
-
+        if(this.isStarted) {
+            window.requestAnimationFrame(function() {
+                that.start(false)
+            })
+        }   
     }
 
     stop(reason) {
+        
         this.ctx.save()
 
         switch(reason) {
@@ -82,6 +88,28 @@ class Game {
                 game.planets.forEach(function(planet) {
                     planet.hasGravity = false
                 })
+
+                setTimeout(() => {
+                    this.isStarted = false
+                    gameOver('boundaries')
+                }, 1500);
+
+
+            break;
+
+            case 'fuel':  
+                game.sats.forEach(function(sat) {
+                    sat.vx = 0
+                    sat.vy += 0.2
+
+                })
+                game.planets.forEach(function(planet) {
+                    planet.hasGravity = false
+                })
+
+                setTimeout(() => {
+                    gameOver('fuel')
+                }, 1500);
 
             break;
 
@@ -96,14 +124,10 @@ class Game {
                     })
                     game.spaceShip.vx = 0
                     game.spaceShip.vy -= 0.2
-
-                    
-                }, 2000);
+                }, 1000);
 
                 setTimeout(() => {
-                    
-
-                    
+                    gameOver('win')
                 }, 2000);
                 
 

@@ -28,7 +28,14 @@ h1 {
     /* float: left; */
 }
 
-h4 {
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3em;
+    color: black;
+    text-shadow: 0px 0px 10px #888888;
+}
+
+.title h4 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.8em;
     position: absolute;
@@ -36,6 +43,9 @@ h4 {
     left: 100px;
     color: #888888;
     /* text-shadow: 0px 0px 1px #888888; */
+}
+.level-transition #transition-description {
+    
 }
 
 /* .title {
@@ -83,4 +93,36 @@ h4 {
     /* float: left; */
     width: 100%;
     margin: 0 auto;
+}
+
+.level-transition {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.level-transition #transition-description {
+    color: #888888;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8em;
+    position: relative;
+    bottom: 30px;
+}
+
+.transition-button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    color: white;
+    background-color: rgb(114, 158, 161);
+    border: none;
+    border-radius: 3px;
+    width: 220px;
+    height: 30px;
+    /* padding: 5px 40px; */
+    box-shadow: 0px 0px 7px #888888;
+    margin: 2px;
 }

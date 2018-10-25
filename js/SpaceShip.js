@@ -16,6 +16,7 @@ class SpaceShip {
         this.fuel = 100 //up to 100
         this.fuelRate = 1.5 //speed at what the fuel is consumed
         this.oscillator = 0
+        this.won = false
     }
     draw(direction) {
         var size = this.size
@@ -150,7 +151,7 @@ class SpaceShip {
     }
     update(allObjs) {
         // Game Over events
-        if((this.x < -1000) || (this.x > this.ctx.canvas.width + 1000) || (this.y < -1000) || (this.y > this.ctx.canvas.height + 1000)) {
+        if((this.won == false) && ((this.x < -1000) || (this.x > this.ctx.canvas.width + 1000) || (this.y < -1000) || (this.y > this.ctx.canvas.height + 1000))) {
                 game.stop('boundaries')
             } else if(this.fuel <= 0) {
                 game.stop('fuel')

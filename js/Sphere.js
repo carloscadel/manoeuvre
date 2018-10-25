@@ -65,6 +65,7 @@ class Sphere {
                     return (sat.isTarget == true && sat.isWin == false)
                 })
                 if(winCheck.length == 0) {
+                    game.spaceShip.won = true
                     game.stop('win')
                 }
             } else if((that.isTarget == true) && (that.isHooked == true) && (that.isWin == false)) {// reduce
