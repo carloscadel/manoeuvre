@@ -83,7 +83,6 @@ class Game {
                 game.sats.forEach(function(sat) {
                     sat.vx = 0
                     sat.vy += 0.2
-
                 })
                 game.planets.forEach(function(planet) {
                     planet.hasGravity = false

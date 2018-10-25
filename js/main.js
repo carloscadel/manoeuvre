@@ -34,43 +34,41 @@ function frontPage() {
     $('#introCanvas').fadeIn(500)
     $('#frontpage').fadeIn(500)
     game.start()
-    
 }
 
 frontPage()
 //* DO NOT DELETE
 //Levels to be called 
-// var game = new Game(ctx, levels[1])
-// var game = new Game(ctx, levels[2])
-// var game = new Game(ctx, levels[3])
+// var game = new Game(ctx, levels[2]) //Training Level
+// var game = new Game(ctx, levels[3]) //Level 2
 
 // game.start()
 
 
 $('#training-button').click(function() {
-        // $('#introCanvas').hide()
-        $('#introCanvas').fadeOut(500)
-        $('#frontpage').fadeOut(500)
-    
-        setTimeout(() => {
-            $('#transition-msg').text('Training Level')
-            $('.level-transition').fadeIn(500)
-        }, 500);
-    
-        setTimeout(() => {
-            $('.level-transition').fadeOut(500)
-        }, 2000);
-    
-        setTimeout(() => {
-            $('#spaceCanvas').fadeIn(500)
-            game = new Game(ctx, levels[2])
-            game.start()
-        }, 2500);
-    
-        document.onkeydown = function(e) {
-            e.preventDefault()
-            game.spaceShip.move(e.key) 
-        } 
+    // $('#introCanvas').hide()
+    $('#introCanvas').fadeOut(500)
+    $('#frontpage').fadeOut(500)
+
+    setTimeout(() => {
+        $('#transition-msg').text('Training Level')
+        $('.level-transition').fadeIn(500)
+    }, 500);
+
+    setTimeout(() => {
+        $('.level-transition').fadeOut(500)
+    }, 2000);
+
+    setTimeout(() => {
+        $('#spaceCanvas').fadeIn(500)
+        game = new Game(ctx, levels[2]) //Training Level
+        game.start()
+    }, 2500);
+
+    document.onkeydown = function(e) {
+        e.preventDefault()
+        game.spaceShip.move(e.key) 
+    } 
 })
 
 

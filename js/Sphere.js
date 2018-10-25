@@ -38,7 +38,6 @@ class Sphere {
 
     drawTarget() {
         let color = this.color.substring(0, this.color.length - 1) + ', 0.1)'
-        console.log(color)
         this.ctx.save()
         this.gradient = ctx.createRadialGradient(this.x, this.y, oscTargetRadius - 9, this.x, this.y, oscTargetRadius)
         this.gradient.addColorStop(0, color);
