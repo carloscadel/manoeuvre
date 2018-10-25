@@ -48,6 +48,29 @@ frontPage()
 
 
 $('#training-button').click(function() {
+        // $('#introCanvas').hide()
+        $('#introCanvas').fadeOut(500)
+        $('#frontpage').fadeOut(500)
+    
+        setTimeout(() => {
+            $('#transition-msg').text('Training Level')
+            $('.level-transition').fadeIn(500)
+        }, 500);
+    
+        setTimeout(() => {
+            $('.level-transition').fadeOut(500)
+        }, 2000);
+    
+        setTimeout(() => {
+            $('#spaceCanvas').fadeIn(500)
+            game = new Game(ctx, levels[2])
+            game.start()
+        }, 2500);
+    
+        document.onkeydown = function(e) {
+            e.preventDefault()
+            game.spaceShip.move(e.key) 
+        } 
 })
 
 
@@ -112,7 +135,15 @@ function gameOver(reason) {
                 frontPage()
             })
             $('#retry').click(function() {
-                
+                // game.isStarted = true
+                // $('#retry').hide()
+                // $('#main-page').hide()
+                // $('.level-transition').hide()
+                // $('#transition-description').hide()
+                // $('#transition-msg').text('')
+                // $('#transition-description').text("")
+                // $('#spaceCanvas').fadeIn(500)
+                // game.start()
                 // console.log('click')
             })
                 

@@ -28,7 +28,7 @@ var levels =
                     x: 3/4, 
                     y: -1/4, 
                     radius: 50,
-                    vx: -9.5,
+                    vx: -9,
                     vy: 0,
                     color: 'rgb(255, 107, 53)',
                     fixedPos: false,
@@ -120,7 +120,7 @@ var levels =
                     
     },
     {
-        name: "Level 2",
+        name: "Training Level",
         
         spaceship: {x: 1/9, 
                     y: 1/9,
@@ -131,9 +131,9 @@ var levels =
                     fixedPos: false
                 },
 
-        planets: [{ x: 0.7, 
-                    y: 0.7, 
-                    radius: 75,
+        planets: [{ x: 0.5, 
+                    y: 0.5, 
+                    radius: 35,
                     vx: 0,
                     vy: 0, 
                     color: 'rgb(114, 158, 161)',
@@ -144,23 +144,23 @@ var levels =
                 ],
 
         sats:  [{   name: "sat1",
-                    x: 0.7, 
-                    y: 1.0, 
+                    x: 0.5, 
+                    y: 1/4, 
                     radius: 10,
                     vx: -5,
                     vy: 0,
-                    color: 'rgb(255, 107, 53)',
+                    color: 'rgba(0, 0, 255, 0.3)',
                     fixedPos: false,
-                    isTarget: false,
+                    isTarget: true,
                     hasGravity: false,
-                    assignedGoal: undefined
+                    assignedGoal: 1
                 },
                 {   name: "sat2",
-                    x: 1.0, 
-                    y: 0.7, 
+                    x: 0.5, 
+                    y: 3/4, 
                     radius: 10,
-                    vx: 0,
-                    vy: 5,
+                    vx: 5,
+                    vy: 0,
                     color: 'rgb(255, 107, 53)',
                     fixedPos: false,
                     isTarget: false,
@@ -168,34 +168,30 @@ var levels =
                     assignedGoal: undefined
                 },
                 {   name: "sat3",
-                    x: 0.7,
-                    y: 0.3,
+                    x: 0.3,
+                    y: 0.5,
                     radius: 10,
-                    vx: -5,
-                    vy: 0,
+                    vx: 0,
+                    vy: 5,
                     color: 'rgb(152, 206, 0)',
                     fixedPos: false,
                     isTarget: true,
                     hasGravity: false,
                     assignedGoal: 0
-                },
-                {   name: "sat4",
-                    x: 0.7,    
-                    y: 0.5,
-                    radius: 10,
-                    vx: -5,
-                    vy: 0,
-                    color: 'rgb(255, 107, 53)',
-                    fixedPos: false,
-                    isTarget: false,
-                    hasGravity: false,
-                    assignedGoal: undefined}],
+                }
+                ],
 
         goals: [{   name: 'goal0',
                     x: 0.2, 
                     y: 0.2, 
                     radius: 30,
                     color: 'rgba(0, 255, 0, 0.3)'
+                }, 
+                    {   name: 'goal0',
+                    x: 0.8, 
+                    y: 0.8, 
+                    radius: 30,
+                    color: 'rgba(0, 0, 255, 0.3)'
                 }]
                     
     }
