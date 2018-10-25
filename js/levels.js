@@ -149,7 +149,7 @@ var levels =
                     radius: 10,
                     vx: -5,
                     vy: 0,
-                    color: 'rgba(0, 0, 255, 0.3)',
+                    color: 'rgba(223, 190, 153)',
                     fixedPos: false,
                     isTarget: true,
                     hasGravity: false,
@@ -191,7 +191,7 @@ var levels =
                     x: 0.8, 
                     y: 0.8, 
                     radius: 30,
-                    color: 'rgba(0, 0, 255, 0.3)'
+                    color: 'rgba(223, 190, 153, 0.3)'
                 }]
                     
     }
