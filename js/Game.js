@@ -92,7 +92,7 @@ class Game {
                 setTimeout(() => {
                     this.isStarted = false
                     gameOver('boundaries')
-                }, 1500);
+                }, 1000);
 
 
             break;

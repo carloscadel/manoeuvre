@@ -22,6 +22,7 @@ var requestId
 var game = new Game(ctxIntro, levels[0])//Intro level
 
 function frontPage() {
+    game.isStarted = false
     game = new Game(ctxIntro, levels[0])//Intro level
     $('#frontpage').hide()
     $('#spaceCanvas').hide()
@@ -83,6 +84,7 @@ function gameOver(reason) {
     switch(reason) {
 
         case 'boundaries':
+            game.isStarted = false
             $('#spaceCanvas').fadeOut(500)
             $('#transition-msg').text('Game Over')
             $('#transition-description').text("You went too far")
@@ -100,7 +102,7 @@ function gameOver(reason) {
                 $('#retry').hide()
                 $('#main-page').hide()
                 $('.level-transition').hide()
-                game.isStarted = false
+                
                 frontPage()
             })
                 
