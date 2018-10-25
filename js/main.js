@@ -28,6 +28,9 @@ function frontPage() {
     $('#spaceCanvas').hide()
     $('.level-transition').hide()
     $('.transition-buttons').hide()
+    $('.transition-button').hide()
+    $('.transition-msg').hide()
+    $('#transition-description').hide()
     $('#introCanvas').fadeIn(500)
     $('#frontpage').fadeIn(500)
     game.start()
@@ -79,6 +82,8 @@ $('#about-button').click(function() {
     // console.log('click')
 })
 
+
+
 function gameOver(reason) {
 
     switch(reason) {
@@ -102,19 +107,40 @@ function gameOver(reason) {
                 $('#retry').hide()
                 $('#main-page').hide()
                 $('.level-transition').hide()
+                $('#transition-description').hide()
                 
                 frontPage()
+            })
+            $('#retry').click(function() {
+                
+                // console.log('click')
             })
                 
         break;
 
         case 'fuel':
-            $('#spaceCanvas').fadeOut(500)
-            $('#transition-msg').text('Game Over')
-            $('#transition-description').text("You ran out of fuel")
-            setTimeout(() => {
-                $('.level-transition').fadeIn(500)
-            }, 1000);
+        game.isStarted = false
+        $('#spaceCanvas').fadeOut(500)
+        $('#transition-msg').text('Game Over')
+        $('#transition-description').text("You ran out of fuel!")
+        setTimeout(() => {
+            $('.level-transition').fadeIn(500)
+        }, 1000);
+        setTimeout(() => {
+            $('#retry').fadeIn(500)
+            $('#next-level').hide()
+            $('#main-page').fadeIn(500)
+            $('.transition-buttons').fadeIn(500)
+        }, 1250);
+
+        $('#main-page').click(function() {
+            $('#retry').hide()
+            $('#main-page').hide()
+            $('.level-transition').hide()
+            $('#transition-description').hide()
+            
+            frontPage()
+        })
         break;
 
         case 'win':
