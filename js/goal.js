@@ -8,6 +8,7 @@ class Goal {
         this.color = color
         this.angle = 0
         this.oscillator = 0
+        //just changing stuff
         // this.plug = 1
         // this.oscillator = Math.abs(Math.cos(this.beta))
     }
