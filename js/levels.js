@@ -35,19 +35,7 @@ var levels =
                     isTarget: false,
                     hasGravity: false,
                     assignedGoal: undefined
-                // },
-                // {   name: "sat2",
-                //     x: 6/2, 
-                //     y: (-2.5), 
-                //     radius: 50,
-                //     vx: -3,
-                //     vy: 2,
-                //     color: 'rgb(255, 107, 53)',
-                //     fixedPos: false,
-                //     isTarget: false,
-                //     hasGravity: false,
-                //     assignedGoal: undefined
-            }],
+                }],
 
         goals: []
                     

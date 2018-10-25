@@ -100,6 +100,13 @@ class Game {
                     
                 }, 2000);
 
+                setTimeout(() => {
+                    
+
+                    
+                }, 2000);
+                
+
             break;
 
         }
