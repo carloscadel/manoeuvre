@@ -6,6 +6,12 @@ var ctxIntro = introCanvas.getContext('2d')
 ctxIntro.canvas.width = window.innerWidth
 ctxIntro.canvas.height = window.innerHeight
 
+//canvas for the instructions
+var instructCanvas = document.getElementById('instructCanvas')
+var ctxInstruct = instructCanvas.getContext('2d')
+ctxInstruct.canvas.width = window.innerWidth
+ctxInstruct.canvas.height = window.innerHeight
+
 //canvas for the game
 var canvas = document.getElementById('spaceCanvas')
 var ctx = canvas.getContext('2d')
@@ -26,6 +32,8 @@ function frontPage() {
     game = new Game(ctxIntro, levels[0])//Intro level
     $('#frontpage').hide()
     $('#spaceCanvas').hide()
+    $('#instructCanvas').hide()
+    $('#instructions').hide()
     $('.level-transition').hide()
     $('.transition-buttons').hide()
     $('.transition-button').hide()

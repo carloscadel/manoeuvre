@@ -4,7 +4,7 @@ class Game {
         this.goals = []
         this.planets = []
         this.sats = []
-        this.spaceShip = new SpaceShip(this.ctx, level.spaceship.x, level.spaceship.y, level.spaceship.size, level.spaceship.vx, level.spaceship.vy, level.spaceship.color, level.spaceship.fixedPos)
+        this.spaceShip = new SpaceShip(this.ctx, level.spaceship.x, level.spaceship.y, level.spaceship.size, level.spaceship.vx, level.spaceship.vy, level.spaceship.color, level.spaceship.fixedPos, level.spaceship.fuel)
         this.bg = new Background(this.ctx, this.ctx.canvas.width, this.ctx.canvas.height)
 
         // console.log(level)

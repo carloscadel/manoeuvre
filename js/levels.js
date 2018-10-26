@@ -11,7 +11,8 @@ var levels =
                     vx: 0,
                     vy: 0,
                     color: 'grey',
-                    fixedPos: true
+                    fixedPos: true,
+                    fuel: 10000
                 },
 
         planets: [{ x: 3/4, 
@@ -49,7 +50,8 @@ var levels =
                     vx: 0,
                     vy: 0,
                     color: 'grey',
-                    fixedPos: false
+                    fixedPos: false,
+                    fuel: 100
                 },
 
         planets: [{ x: 1/2, 
@@ -128,7 +130,8 @@ var levels =
                     vx: 0,
                     vy: 0,
                     color: 'grey',
-                    fixedPos: false
+                    fixedPos: false,
+                    fuel: 100
                 },
 
         planets: [{ x: 0.5, 

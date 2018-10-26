@@ -1,5 +1,5 @@
 class SpaceShip {
-    constructor(ctx, x, y, size, vx = 2, vy = 2, color = 'grey', fixedPos = false) {
+    constructor(ctx, x, y, size, vx = 2, vy = 2, color = 'grey', fixedPos = false, isIntro = false) {
         this.ctx = ctx
         this.x = x * this.ctx.canvas.width
         this.y = y * this.ctx.canvas.height
@@ -17,6 +17,7 @@ class SpaceShip {
         this.fuelRate = 1.5 //speed at what the fuel is consumed
         this.oscillator = 0
         this.won = false
+        // this.isIntro = false
     }
     draw(direction) {
         var size = this.size
