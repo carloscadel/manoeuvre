@@ -12,7 +12,7 @@ var levels =
                     vy: 0,
                     color: 'grey',
                     fixedPos: true,
-                    fuel: 10000
+                    fuel: 100000
                 },
 
         planets: [{ x: 3/4, 

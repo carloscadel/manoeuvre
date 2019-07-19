@@ -6,6 +6,7 @@ class Game {
         this.sats = []
         this.spaceShip = new SpaceShip(this.ctx, level.spaceship.x, level.spaceship.y, level.spaceship.size, level.spaceship.vx, level.spaceship.vy, level.spaceship.color, level.spaceship.fixedPos, level.spaceship.fuel)
         this.bg = new Background(this.ctx, this.ctx.canvas.width, this.ctx.canvas.height)
+        // this.isIntro = level
 
         // console.log(level)
         // console.log(this.spaceShip)
@@ -62,6 +63,7 @@ class Game {
     start(isTheFirstStart = true) {
         if (isTheFirstStart) {
             this.isStarted = true
+            // this.spaceShip.fuel = 100
         }
         var that = this
         this.update()
@@ -72,6 +74,7 @@ class Game {
                 that.start(false)
             })
         }   
+
     }
 
     stop(reason) {
@@ -80,6 +83,22 @@ class Game {
 
         switch(reason) {
             case 'boundaries':  
+            game.sats.forEach(function(sat) {
+                sat.vx = 0
+                sat.vy += 0.2
+            })
+            game.planets.forEach(function(planet) {
+                planet.hasGravity = false
+            })
+            
+                setTimeout(() => {
+                    this.isStarted = false
+                }, 1500);
+                gameOver('boundaries')
+                
+            break;
+
+            case 'fuel':  
                 game.sats.forEach(function(sat) {
                     sat.vx = 0
                     sat.vy += 0.2
@@ -90,23 +109,6 @@ class Game {
 
                 setTimeout(() => {
                     this.isStarted = false
-                    gameOver('boundaries')
-                }, 1500);
-
-
-            break;
-
-            case 'fuel':  
-                game.sats.forEach(function(sat) {
-                    sat.vx = 0
-                    sat.vy += 0.2
-
-                })
-                game.planets.forEach(function(planet) {
-                    planet.hasGravity = false
-                })
-
-                setTimeout(() => {
                     gameOver('fuel')
                 }, 1500);
 
@@ -129,7 +131,6 @@ class Game {
                     gameOver('win')
                 }, 2000);
                 
-
             break;
 
         }
